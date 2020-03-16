@@ -1,0 +1,28 @@
+{
+  "name": "pollask",
+  "version": "1.0.0",
+  "description": "A website where any-one can start a poll and then any one can add poll options and vote.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "chai": "^4.2.0"
+  },
+  "devDependencies": {
+    "chai-http": "^4.3.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Linksonder/pollask.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Linksonder/pollask/issues"
+  },
+  "homepage": "https://github.com/Linksonder/pollask#readme"
+}
