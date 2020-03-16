@@ -10,19 +10,19 @@ let app = require('../src/app');
 
 const Room = mongoose.model('Room');
 
-
-//coverage
-//draaien
-//assert
-//request naar de api
+var roomId = mongoose.Types.ObjectId();
 
 describe('rooms route', () => {
-
 
     before((done) => {
 
         Room.deleteMany({}, (err) => {
-            done();
+            new Room({
+                _id: roomId,
+                subject: "My first test room"
+            }).save((err) => {
+                done();
+            })
         })
 
     });
@@ -40,10 +40,21 @@ describe('rooms route', () => {
                 expect(res.body.subject).to.equal('My first room');
 
                 Room.countDocuments({}, (err, result) => {
-                    expect(result).to.equal(1);
+                    expect(result).to.equal(2);
                     done();
                 })
             });
     });
-    it('GET /:ID should get details of 1 room');
+
+    it('GET /:ID should get details of 1 room', (done) => {
+        chai.request(app)
+            .get('/rooms/' + roomId)
+            .end(function (err, res) {
+
+                expect(err).to.be.null;
+                expect(res).to.have.status(200);
+                expect(res.body.subject).to.equal('My first test room');
+                done();
+            });
+    });
 })
