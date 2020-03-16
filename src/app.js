@@ -1,4 +1,3 @@
-const http = require('http');
 const express = require('express');
 const mongoose = require('mongoose');
 
@@ -16,14 +15,9 @@ else
 require('./models/room');
 
 
-let roomRoutes = require('./routes/room-routes');
-app.use('/rooms', roomRoutes);
+app.use('/rooms', require('./routes/room-routes'));
+app.use('/rooms/:roomId/questions', require('./routes/question-routes'));
 
-//nodig voor websockets
-let server = http.createServer(app);
 
-server.listen(8080, () => {
-    console.log('Listening on port 8080');
-})
 
 module.exports = app;

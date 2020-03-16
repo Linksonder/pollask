@@ -1,33 +1,20 @@
-process.env.ENV = "TEST";
-const mongoose = require('mongoose');
+
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
+const mongoose = require('mongoose');
+const Room = mongoose.model('Room');
 
 
 let expect = chai.expect;
 let app = require('../src/app');
 
-const Room = mongoose.model('Room');
 
-var roomId = mongoose.Types.ObjectId();
+var roomId = mongoose.Types.ObjectId("5e6f567a4138ba25a4ca3fd0");
 
 describe('rooms route', () => {
-
-    before((done) => {
-
-        Room.deleteMany({}, (err) => {
-            new Room({
-                _id: roomId,
-                subject: "My first test room"
-            }).save((err) => {
-                done();
-            })
-        })
-
-    });
     
-
+    //even kfofie halen!
     it('POST should create a new room ', (done) => {
         chai.request(app)
             .post('/rooms')
@@ -53,7 +40,7 @@ describe('rooms route', () => {
 
                 expect(err).to.be.null;
                 expect(res).to.have.status(200);
-                expect(res.body.subject).to.equal('My first test room');
+                expect(res.body.subject).to.equal('Room A');
                 done();
             });
     });
